@@ -25,7 +25,7 @@ import jose from "node-jose";
  * @param {string} rawSHC The raw 'shc://' string (from a QR code)
  * @return The header, payload and verification result of the SHC
  */
-const parseShc = async (rawSHC: string) => {
+export const parseShc = async (rawSHC: string) => {
 	const jwt = numericShcToJwt(rawSHC);
 	const splitJwt = jwt.split(".")
 	const header = parseJwtHeader(splitJwt[0])
