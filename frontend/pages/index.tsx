@@ -14,7 +14,7 @@ import detectEthereumProvider from "@metamask/detect-provider"
 import { Contract, providers, Signer } from "ethers"
 import { hexlify } from "ethers/lib/utils"
 import { useEffect, useState } from "react"
-import Immunization from "../../contract/artifacts/contracts/ZKSmartHealthCards.sol/ZKSmartHealthCards.json"
+import Immunization from "../abis/ZKSmartHealthCards.json"
 
 const Home: NextPage = () => {
     // const { enqueueSnackbar } = useSnackbar();
