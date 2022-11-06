@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utilities/shc/parsers.js", "utilities/shc/js/keys.js", "utilities/typechain/ZKSmartHealthCards.d.ts.nk", "pages/_app.tsx.bkbk", "pages/_app.tsx.bk", "pages/_app.tsx.bkbk", "pages/_app copy.tsx.bk"],
+  "exclude": ["node_modules"]
+}
