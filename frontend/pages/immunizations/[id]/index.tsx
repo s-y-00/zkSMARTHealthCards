@@ -23,7 +23,7 @@ const {
     generateProof,
     packToSolidityProof,
 } = require("@semaphore-protocol/proof");
-const QrReader = dynamic(() => import("react-qr-reader"), { ssr: false });
+// const QrReader = dynamic(() => import("react-qr-reader"), { ssr: false });
 
 /**
  * 0. retrieve Immunization from _id.
