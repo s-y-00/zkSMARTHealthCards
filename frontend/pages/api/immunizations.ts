@@ -21,10 +21,10 @@ export default async function handler(
     const extractedData = await parseShc(rawSHC);
 
     try {
-        extractedData.payload.vc.credentialSubject.fhirBundle.entry.forEach(entry => {
+        extractedData.payload.vc.credentialSubject.fhirBundle.entry.forEach((entry: { resource: any; }) => {
             const resource = entry.resource;
             if (resource.resourceType == "Immunization" && resource.status == "completed") {
-                resource.vaccineCode.coding.forEach(async coding => {
+                resource.vaccineCode.coding.forEach(async (coding: { system: string; code: string; }) => {
                     console.log(coding);
 
                     const isEligible = await contract.isEligible(immunizationId, coding.system, coding.code);

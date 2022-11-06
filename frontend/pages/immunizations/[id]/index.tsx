@@ -115,9 +115,8 @@ export default function ImmunizationDetail() {
     // listen MemberAdded(groupId, identityCommitment, root)
     React.useEffect(() => {
         if (contract && id && identity && chain && chain.id == process.env.CHAIN_ID as Number|unknown) {
-            const groupId = BigNumber.from(id);
-            const filter = contract.filters.MemberAdded(groupId, null, null);
-            contract.on(filter, (groupId: string, identityCommitment: Identity) => {
+            const filter = contract.filters.MemberAdded(BigNumber.from(id), null, null);
+            contract.on(filter, (groupId: any, identityCommitment: any) => {
                 
                 const memberIndex = ImmunizationGroup.indexOf(
                     identityCommitment.toString()
@@ -162,16 +161,16 @@ export default function ImmunizationDetail() {
 
         try {
             const extractedData = await parseShc(inputedRawSHC);
-            const isAnyEligible = extractedData.payload.vc.credentialSubject.fhirBundle.entry.findIndex(entry => {
+            const isAnyEligible = extractedData.payload.vc.credentialSubject.fhirBundle.entry.findIndex((entry: { resource: any; }) => {
                 const resource = entry.resource;
                 if(resource.resourceType == "Immunization" && resource.status == "completed"){
-                    return -1 !== resource.vaccineCode.coding.findIndex(async (coding) => {
-                        return await contract.isEligible(id, coding.system, coding.code);
+                    return -1 !== resource.vaccineCode.coding.findIndex(async (coding: { system: string; code: string; }) => {
+                        return await contract.isEligible(BigNumber.from(id), coding.system, coding.code);
                     });
                 }
             });
             if(isAnyEligible !== -1){
-                const tx = await contract.addMember(id, BigNumber.from(commitment).toString());
+                const tx = await contract.addMember(Number(id), BigNumber.from(commitment).toString());
                 await handleEDialogClose();
             } 
             else {
