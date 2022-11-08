@@ -73,8 +73,8 @@ export default function ImmunizationDetailTemplate(props: Props) {
     const { enqueueSnackbar } = useSnackbar();
 
     const downloadQR: React.MouseEventHandler<HTMLButtonElement> | undefined = () => {
-        const canvas: HTMLElement|null = document.getElementById("proofQRCode");
-        const pngUrl = canvas
+        const canvas = document.getElementById("proofQRCode") as HTMLCanvasElement;
+        const pngUrl: string = canvas
             .toDataURL("image/png")
             .replace("image/png", "image/octet-stream");
         let downloadLink: HTMLAnchorElement = document.createElement("a");
@@ -292,7 +292,7 @@ export default function ImmunizationDetailTemplate(props: Props) {
                                         aria-label="copy"
                                         size="large"
                                         onClick={async () => {
-                                            await copyTextToClipboard(props.solidityProof);
+                                            await copyTextToClipboard(props.solidityProof?? "");
                                             enqueueSnackbar("Copied!");
                                         }}
                                     >

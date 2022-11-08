@@ -60,7 +60,7 @@ function numericShcToJwt(rawSHC: string) {
 	}
 
 	return rawSHC
-		.match(/(..?)/g)
+		.match(/(..?)/g)!
 		.map((number) => String.fromCharCode(parseInt(number, 10) + 45))
 		.join("")
 }

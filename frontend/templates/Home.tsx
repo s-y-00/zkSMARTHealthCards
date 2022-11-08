@@ -59,7 +59,10 @@ export default function HomeTemplate(props: Props) {
                 alignItems="center"
                 spacing={2}
             >
-                <Grid backgroundColor="#6EBDBD" item>
+                <Grid item
+                    style={{
+                        background: "#6EBDBD"
+                    }}>
                     <Box>
                         <Box marginBottom={4}>
                             <Box marginBottom={2}>
