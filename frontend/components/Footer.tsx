@@ -34,7 +34,7 @@ const Footer = (): JSX.Element => {
                             <Link
                                 underline="none"
                                 component="a"
-                                href="https://polygonscan.com/address/0x4B25e2F00F9320F9802C2A734b1890F1E41c77db#code"
+                                href="https://mumbai.polygonscan.com/address/0x33cc7d698550E8d35596Cb7d38a8227EeD94dcd6#code"
                                 color="white"
                                 target={"_blank"}
                                 variant={"subtitle2"}
