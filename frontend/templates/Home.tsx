@@ -87,7 +87,8 @@ export default function HomeTemplate(props: Props) {
                                     align={"center"}
                                 >
                                     A Zero Knowledge proof solution that enables users proving<br/>
-                                    <Link href="https://smarthealth.cards/en/" target="_blank" rel="noopener noreferrer">the SMART Health Cards</Link> without revealing their personal information. People can prove their COVID-19 vaccination or test result without revealing their Name, Age, Residence.
+                                    <a href="https://smarthealth.cards/en/" target="_blank" rel="noopener noreferrer">the SMART Health Cards
+                                    </a> without revealing their personal information. People can prove their COVID-19 vaccination or test result without revealing their Name, Age, Residence.
                                 </Typography>
                             </Box>
                         </Box>
