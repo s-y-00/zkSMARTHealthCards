@@ -18,18 +18,16 @@ import {
     Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import CloseIcon from "@mui/icons-material/Close";
-import Container from "../components/Container";
-import { Immunization } from "../utilities/entities";
 import { AccountCircle, Diamond } from "@mui/icons-material";
 import DownloadIcon from '@mui/icons-material/Download';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import WysiwygIcon from '@mui/icons-material/Wysiwyg';
 import SourceIcon from '@mui/icons-material/Source';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import QRcode from 'qrcode.react'
 import { useSnackbar } from "notistack";
+import Container from "../components/Container";
+import { Immunization } from "../utilities/entities";
 
 type Props = {
     immunization: Immunization;

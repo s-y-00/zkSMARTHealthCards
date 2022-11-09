@@ -9,9 +9,9 @@ import {
     Stack,
     Typography,
 } from "@mui/material";
+import { AccountCircle, Diamond } from "@mui/icons-material";
 import Container from "../components/Container";
 import { QR } from "../utilities/entities";
-import { AccountCircle, Diamond } from "@mui/icons-material";
 
 type Props = {
     onUpdateProof: (event: React.ChangeEvent<HTMLInputElement>) => void;

@@ -63,8 +63,8 @@ export function Bar(props: Props) {
                     style={{
                         display: "flex",
                         zIndex: 50,
-                        paddingLeft: 32,
-                        paddingRight: 32,
+                        paddingLeft: 35,
+                        paddingRight: 35,
                         paddingTop: 22,
                         justifyContent: "end",
                     }}
