@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
-import { useAccount, useSwitchNetwork, useNetwork } from "wagmi";
+import { chain as chains, useAccount, useSwitchNetwork, useNetwork } from "wagmi";
 import { useSnackbar } from "notistack";
 import { ConnectKitButton } from "connectkit";
 import { useLocalStorage } from "../hooks/useLocalStorage";
@@ -19,17 +19,16 @@ export function Bar(props: Props) {
     const { switchNetwork } = useSwitchNetwork();
     const [identityCommitment] = useLocalStorage("identityCommitment", "");
 
-    // React.useEffect(() => {
-    //     if (
-    //         chain &&
-    //         chain.id !== 137 &&
-    //         identityCommitment !== null &&
-    //         identityCommitment !== ""
-    //     ) {
-    //         enqueueSnackbar("Invalid Network", { variant: "error" });
-    //         switchNetwork?.(137);
-    //     }
-    // }, [chain, enqueueSnackbar, identityCommitment, switchNetwork]);
+    React.useEffect(() => {
+        if (
+            process.env.NEXT_PUBLIC_NETWORK === "MUMBAI" &&
+            chain &&
+            chain.id !== chains.polygonMumbai.id
+        ) {
+            enqueueSnackbar("Invalid Network", { variant: "error" });
+            switchNetwork?.(chains.polygonMumbai.id);
+        }
+    }, [chain, enqueueSnackbar, identityCommitment, switchNetwork]);
 
     return (
         <AppBar
