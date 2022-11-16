@@ -17,6 +17,10 @@ const alchemyId = process.env.ALCHEMY_APIKEY;
 const client = createClient(
   getDefaultClient({
     appName: "zkSMARTHealthCards",
+    chains: [
+      chain.polygonMumbai,
+      chain.localhost,
+    ],
     alchemyId,
   })
 );
@@ -31,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             </SnackbarProvider>
           </AnimatePresence>
-        </ConnectKitProvider>{" "}
+        </ConnectKitProvider>
       </WagmiConfig>
     </ThemeProvider>
   );
