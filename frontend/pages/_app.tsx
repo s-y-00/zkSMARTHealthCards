@@ -12,7 +12,7 @@ import { ThemeProvider } from '@mui/material';
 import { theme } from '../styles/theme';
 import '../styles/globals.css';
 
-const alchemyId = process.env.ALCHEMY_APIKEY;
+const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_APIKEY;
 
 const client = createClient(
   getDefaultClient({
