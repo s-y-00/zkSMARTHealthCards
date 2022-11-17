@@ -278,6 +278,9 @@ export default function ImmunizationDetailTemplate(props: Props) {
                                         id="proofQRCode"
                                         value={props.solidityProof}
                                         size={300}
+                                        style={{
+                                            margin: "auto",
+                                        }}
                                     />
                                     <IconButton 
                                         aria-label="download"
@@ -318,7 +321,7 @@ export default function ImmunizationDetailTemplate(props: Props) {
                         label="SMART Health Cards"
                         fullWidth
                         variant="standard"
-                        placeholder="shc://"
+                        placeholder="shc:/"
                         value={props.rawSHC}
                         onChange={props.onUpdateRawSHC}
                     />

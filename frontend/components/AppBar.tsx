@@ -42,7 +42,7 @@ export function Bar(props: Props) {
                 <Box
                     display="flex"
                     flexGrow={1}
-                    sx={{ alignItems: "center", cursor: "pointer" }}
+                    sx={{ alignItems: "center", cursor: "pointer", marginRight: "50%" }}
                     onClick={() => {
                         window.location.href = "/";
                     }}
@@ -58,10 +58,9 @@ export function Bar(props: Props) {
                         src={"/zkshc.png"}
                     />
                 </Box>
-                <div className="fixed z-50 flex w-full justify-end px-8 pt-10" 
+                <Box className="fixed flex w-full justify-end px-8 pt-10" 
                     style={{
                         display: "flex",
-                        zIndex: 50,
                         paddingLeft: 35,
                         paddingRight: 35,
                         paddingTop: 22,
@@ -69,7 +68,7 @@ export function Bar(props: Props) {
                     }}
                     >
                         <ConnectKitButton />
-                    </div>
+                    </Box>
             </Toolbar>
         </AppBar>
     );

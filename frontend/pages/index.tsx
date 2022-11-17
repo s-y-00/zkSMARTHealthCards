@@ -32,7 +32,7 @@ const Home: NextPage = () => {
         onSettled() {
             if (!identityCommitment) {
                 const message = {
-                    app: "ZK-SMARTHealthCards",
+                    app: "zkSMARTHealthCards",
                     operation: "Generate Identity",
                     nonce: utils.hexlify(utils.randomBytes(32)),
                 };

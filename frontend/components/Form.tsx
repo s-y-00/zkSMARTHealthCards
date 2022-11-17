@@ -98,6 +98,8 @@ export default function Form(props: Props) {
                     backgroundColor: "#FFC749",
                     border: "none",
                     color: "#463B2A",
+                    fontSize: 20,
+                    fontWeight: 500,
                     "&:hover": {
                         backgroundColor: "#2BA9E0",
                         color: "rgba(62,51,62,1)",
