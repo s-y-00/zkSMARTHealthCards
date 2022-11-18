@@ -3,7 +3,7 @@ import { Identity } from "@semaphore-protocol/identity";
 import { useConnect, useSignMessage, useAccount, useBalance } from "wagmi";
 import { utils } from "ethers";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-// import { useSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
 // import { ConnectKitButton } from "connectkit";
 
 import type { NextPage } from 'next'
@@ -17,7 +17,7 @@ import { useEffect, useState } from "react"
 import Immunization from "../abis/ZKSmartHealthCards.json"
 
 const Home: NextPage = () => {
-    // const { enqueueSnackbar } = useSnackbar();
+    const { enqueueSnackbar } = useSnackbar();
 
     const [address, setAddress] = React.useState("");
 
@@ -27,6 +27,13 @@ const Home: NextPage = () => {
         "identityCommitment",
         ""
     );
+
+    const { signMessage } = useSignMessage({
+        onSettled(data) {
+            const identityCommitment = new Identity(data);
+            setIdentityCommitment(identityCommitment.toString());
+        },
+    });
 
     const { connect, connectors } = useConnect({
         onSettled() {
@@ -42,56 +49,13 @@ const Home: NextPage = () => {
         },
     });
 
-    const { signMessage } = useSignMessage({
-        onSettled(data) {
-            const identityCommitment = new Identity(data);
-            setIdentity(identityCommitment);
-        },
-    });
-
-  const [_identity, setIdentity] = useState<Identity>()
-  const [_signer, setSigner] = useState<Signer>()
-  const [_contract, setContract] = useState<Contract>()
-
-  useEffect(() => {
-      ;(async () => {
-          const ethereum = (await detectEthereumProvider()) as any
-          const accounts = await ethereum.request({ method: "eth_requestAccounts" })
-
-          await ethereum.request({
-              method: "wallet_switchEthereumChain",
-              params: [
-                  {
-                      chainId: hexlify(Number(process.env.ETHEREUM_CHAIN_ID!)).replace("0x0", "0x")
-                  }
-              ]
-          })
-
-          const ethersProvider = new providers.Web3Provider(ethereum)
-
-          if (accounts[0]) {
-              setSigner(ethersProvider.getSigner())
-
-              setContract(new Contract(process.env.CONTRACT_ADDRESS!, Immunization.abi, ethersProvider.getSigner()))
-          }
-
-          ethereum.on("accountsChanged", (newAccounts: string[]) => {
-              if (newAccounts.length !== 0) {
-                  setSigner(ethersProvider.getSigner())
-
-                  setContract(new Contract(process.env.CONTRACT_ADDRESS!, Immunization.abi, ethersProvider.getSigner()))
-              } else {
-                  setSigner(undefined)
-              }
-          })
-      })()
-
-      if (isConnected) {
-        setAddress(account || "");
-    } else {
-        setAddress("");
-    }
-  }, [account, isConnected]);
+    React.useEffect(() => {
+        if (isConnected) {
+            setAddress(account || "");
+        } else {
+            setAddress("");
+        }
+    }, [account, enqueueSnackbar, isConnected]);
 
   return (
     <MainLayout
