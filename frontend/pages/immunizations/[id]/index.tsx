@@ -92,7 +92,7 @@ export default function ImmunizationDetail() {
     }, [identityCommitment, provider, router, signer, account]);
 
     React.useEffect(() => {
-        if (contract && id && chain && chain.id === 31337 && chain.id == process.env.CHAIN_ID as Number|unknown) {
+        if (contract && id && chain && chain.id === Number(process.env.NEXT_PUBLIC_DEFAULT_CHAIN_ID)) {
             contract.immunizations(id as string).then((r: any) => {
                 if (!r) return;
                 setImmunization({
@@ -114,7 +114,7 @@ export default function ImmunizationDetail() {
 
     // listen MemberAdded(groupId, identityCommitment, root)
     React.useEffect(() => {
-        if (contract && id && identity && chain && chain.id == process.env.CHAIN_ID as Number|unknown) {
+        if (contract && id && identity && chain && chain.id == Number(process.env.NEXT_PUBLIC_DEFAULT_CHAIN_ID)) {
             const filter = contract.filters.MemberAdded(BigNumber.from(id), null, null);
             contract.on(filter, (groupId: any, identityCommitment: any) => {
                 
@@ -138,7 +138,7 @@ export default function ImmunizationDetail() {
     }, [chain, contract, enqueueSnackbar, ImmunizationGroup, id, identity]);
 
     const onClickJoinImmunization = React.useCallback(async () => {
-        if (!contract || !id || !identity || !signer || !chain || chain.id !== 31337) return;
+        if (!contract || !id || !identity || !signer || !chain || chain.id !== Number(process.env.NEXT_PUBLIC_DEFAULT_CHAIN_ID)) return;
         const commitment = identity.generateCommitment();
 
         const memberIndex = ImmunizationGroup.indexOf(commitment);
