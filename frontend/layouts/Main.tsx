@@ -14,6 +14,7 @@ import Contaier2 from "../components/Container";
 type Props = {
     loading: boolean;
     setLoading: (loading: boolean) => void;
+    onClickConnect?: () => void;
     children: React.ReactNode;
     title?: string;
 };
@@ -21,7 +22,7 @@ type Props = {
 export default function MainLayout(props: Props) {
     return (
         <div>
-            <Bar />
+            <Bar onClickConnect={props.onClickConnect}/>
 
             <Container>
                 <Head>

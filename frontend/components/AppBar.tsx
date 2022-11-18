@@ -10,7 +10,7 @@ import { ConnectKitButton } from "connectkit";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 type Props = {
-    // onClickConnect?: () => void;
+    onClickConnect?: () => void;
 };
 
 export function Bar(props: Props) {
@@ -18,6 +18,9 @@ export function Bar(props: Props) {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const { switchNetwork } = useSwitchNetwork();
     const [identityCommitment] = useLocalStorage("identityCommitment", "");
+
+    const { address: useAccountAddress } = useAccount();
+    const [address, setAddress] = React.useState("");
 
     React.useEffect(() => {
         if (
@@ -29,6 +32,50 @@ export function Bar(props: Props) {
             switchNetwork?.(chains.polygonMumbai.id);
         }
     }, [chain, enqueueSnackbar, identityCommitment, switchNetwork]);
+
+    React.useEffect(() => {
+        if (useAccountAddress) {
+            const shortAddress = `${useAccountAddress.slice(
+                0,
+                4
+            )}...${useAccountAddress.slice(-4)}`;
+            setAddress(shortAddress);
+        } else {
+            setAddress("");
+        }
+    }, [useAccountAddress]);
+
+    const ConnectOrLaunchApp = React.useMemo(() => {
+        if (address) {
+            return (
+                <Typography component={"h2"} sx={{ 
+                    cursor: "pointer",
+                    color: "#003939",
+                    fontSize: 20,
+                    }}>
+                    {address}
+                </Typography>
+            );
+        } else {
+            return (
+                <Button
+                    color="inherit"
+                    variant={"outlined"}
+                    sx={{
+                        color: "#003939",
+                        borderRadius: 50,
+                        textTransform: "lowercase",
+                        "&:hover": {
+                            color: "rgba(62,51,62,1)",
+                        },
+                    }}
+                    onClick={props.onClickConnect}
+                >
+                    <Typography component={"h2"}>{"connect"}</Typography>
+                </Button>
+            );
+        }
+    }, [address, props.onClickConnect]);
 
     return (
         <AppBar
@@ -67,7 +114,8 @@ export function Bar(props: Props) {
                         justifyContent: "end",
                     }}
                     >
-                        <ConnectKitButton />
+                        {/* <ConnectKitButton /> */}
+                        <Box sx={{ flexGrow: 0 }}>{ConnectOrLaunchApp}</Box>
                     </Box>
             </Toolbar>
         </AppBar>

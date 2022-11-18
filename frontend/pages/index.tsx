@@ -99,6 +99,9 @@ const Home: NextPage = () => {
             setLoading={() => {
                 // do nothing
             }}
+            onClickConnect={() => {
+                connect({ connector: connectors[0] });
+            }}
             title={"zkSMARTHealthCards"}
         >
             <HomeTemplate address={address} />
