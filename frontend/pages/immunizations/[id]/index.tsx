@@ -139,7 +139,7 @@ export default function ImmunizationDetail() {
 
     const onClickJoinImmunization = React.useCallback(async () => {
         if (!contract || !id || !identity || !signer || !chain || chain.id !== Number(process.env.NEXT_PUBLIC_DEFAULT_CHAIN_ID)) return;
-        const commitment = identity.generateCommitment();
+        const commitment = identity.getCommitment();
 
         const memberIndex = ImmunizationGroup.indexOf(commitment);
         // console.log(inputedRawSHC);
