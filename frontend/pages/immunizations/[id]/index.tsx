@@ -192,7 +192,7 @@ export default function ImmunizationDetail() {
             //     );
             // }
         setLoading(false);
-    }, [chain, contract, enqueueSnackbar, ImmunizationGroup, id, identity, signer]);
+    }, [chain, contract, enqueueSnackbar, ImmunizationGroup, id, identity, inputedRawSHC, signer]);
 
     const onClickGenerateProof = React.useCallback(async () => {
         if (!identity) return;
