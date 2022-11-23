@@ -170,7 +170,7 @@ export default function ImmunizationDetail() {
                 }
             });
             if(isAnyEligible !== -1){
-                const tx = await contract.addMember(Number(id), BigNumber.from(commitment).toString());
+                const tx = await contract.addMember(BigNumber.from(id), BigNumber.from(commitment).toString());
                 await handleEDialogClose();
             } 
             else {
