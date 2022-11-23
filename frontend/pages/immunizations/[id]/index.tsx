@@ -140,10 +140,8 @@ export default function ImmunizationDetail() {
     const onClickJoinImmunization = React.useCallback(async () => {
         if (!contract || !id || !identity || !signer || !chain || chain.id !== Number(process.env.NEXT_PUBLIC_DEFAULT_CHAIN_ID)) return;
         const commitment = identity.getCommitment();
-
         const memberIndex = ImmunizationGroup.indexOf(commitment);
-        // console.log(inputedRawSHC);
-        console.log("memberIndex", memberIndex);
+
         if (memberIndex !== -1) {
             enqueueSnackbar("You are already a member.", { variant: "info" });
             await handleEDialogClose();
@@ -156,8 +154,6 @@ export default function ImmunizationDetail() {
         //     return;
         // }
         setLoading(true);
-
-        console.log(`inputedRawSHC: ${inputedRawSHC}`);
 
         try {
             const extractedData = await parseShc(inputedRawSHC);
@@ -172,6 +168,11 @@ export default function ImmunizationDetail() {
             if(isAnyEligible !== -1){
                 const tx = await contract.addMember(BigNumber.from(id), BigNumber.from(commitment).toString());
                 await handleEDialogClose();
+                enqueueSnackbar(
+                    "Successfully joined!",
+                    { variant: "success" }
+                );
+                setLoading(false);
             } 
             else {
                 enqueueSnackbar("Not eligible to join this immunization.", { variant: "error" });
@@ -184,14 +185,6 @@ export default function ImmunizationDetail() {
             // @ts-ignore
             enqueueSnackbar(e.message || "Unknown error!", { variant: "error" });
         }
-            // } else {
-            //     await handleEDialogClose();
-            //     enqueueSnackbar(
-            //         "Successfully joined!",
-            //         { variant: "success" }
-            //     );
-            // }
-        setLoading(false);
     }, [chain, contract, enqueueSnackbar, ImmunizationGroup, id, identity, inputedRawSHC, signer]);
 
     const onClickGenerateProof = React.useCallback(async () => {
