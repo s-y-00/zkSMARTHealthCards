@@ -1,104 +1,67 @@
-<p align="center">
-    <h1 align="center">
-        <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="https://github.com/semaphore-protocol/website/blob/main/static/img/semaphore-icon-dark.svg">
-            <source media="(prefers-color-scheme: light)" srcset="https://github.com/semaphore-protocol/website/blob/main/static/img/semaphore-icon.svg">
-            <img width="40" alt="Semaphore icon." src="https://github.com/semaphore-protocol/website/blob/main/static/img/semaphore-icon.svg">
-        </picture>
-        Semaphore Boilerplate
-    </h1>
-</p>
+![picture 4](frontend/public/shc-logo-white.png) 
 
-<p align="center">
-    <a href="https://github.com/semaphore-protocol" target="_blank">
-        <img src="https://img.shields.io/badge/project-Semaphore-blue.svg?style=flat-square">
-    </a>
-    <a href="https://github.com/semaphore-protocol/boilerplate/blob/main/LICENSE">
-        <img alt="Github license" src="https://img.shields.io/github/license/semaphore-protocol/boilerplate.svg?style=flat-square">
-    </a>
-    <a href="https://github.com/semaphore-protocol/semaphore.js/actions?query=workflow%3Astyle">
-        <img alt="GitHub Workflow style" src="https://img.shields.io/github/workflow/status/semaphore-protocol/semaphore.js/style?label=style&style=flat-square&logo=github">
-    </a>
-    <a href="https://eslint.org/">
-        <img alt="Linter eslint" src="https://img.shields.io/badge/linter-eslint-8080f2?style=flat-square&logo=eslint">
-    </a>
-    <a href="https://prettier.io/">
-        <img alt="Code style prettier" src="https://img.shields.io/badge/code%20style-prettier-f8bc45?style=flat-square&logo=prettier">
-    </a>
-</p>
+zkSMARTHealthCards is a zero-knowledge proof based solution to protect your privacy in Covid-19 SMART Health Card.
+You can only certify the results of COVID-19 vaccination without disclosing any personal information.
 
-| The repository is divided into three components: [web app](https://github.com/semaphore-protocol/boilerplate/tree/main/apps/web-app), [relay](https://github.com/semaphore-protocol/boilerplate/tree/main/apps/relay) and [contracts](https://github.com/semaphore-protocol/boilerplate/tree/main/apps/contracts). The app allows users to create their own Semaphore identity and create events where only members can post reviews anonymously. |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+The Covid-19 SMART Health Card is a type of [SMART Health Cards](https://smarthealth.cards) that certifies COVID-19 vaccination or test results issued by an agency accredited by the Verifiable Clinical Information Coalition (VCI). SMART Health Cards are the international standard for verifying versions of your clinical information, such as vaccination history or test results.
 
-```mermaid
-flowchart LR
+This project is currently on [Polygon Matic network](https://polygon.technology/solutions/polygon-pos/) and frontend is hosted on [Vercel](https://vercel.com/).
 
-A(Web App) -->|Create events| C(Contracts)
-A -->|Join events| B(Relay)
-A -->|Post event reviews| B
-B --> C
-```
+zkSMARTHealthCards Link
 
-## 🛠 Install
+https://zkshc.vercel.app
 
-Use this repository as a Github [template](https://github.com/semaphore-protocol/boilerplate/generate).
+Demo Video
 
-Clone your repository:
 
-```bash
-git clone https://github.com/<your-username>/<your-repo>.git
-```
+Slide
 
-and install the dependencies:
 
-```bash
-cd <your-repo> && yarn
-```
+## Problems with the current Covid-19 SMART Health Cards
 
-## 📜 Usage
+To prove the results of COVID-19 vaccination with Covid-19 SMART Health Cards, you would show a certificate (QR code or app screen) issued by a VCI-authorized organization.
 
-Copy the `.env.example` file as `.env`:
+This certificate contains personal information such as name, date of birth, and the municipality that issued it.
 
-```bash
-cp .env.example .env
-```
+For example, at an event or restaurant, you only need to certify the results of COVID-19 vaccination, and in many cases you do not need to disclose your personal information.
 
-and add your environment variables.
 
-ℹ️ You can use the default ones to start the app in a local network.
+## Our Solution With Semaphore
 
-### Start the app
+[Semaphore](https://semaphore.appliedzkp.org/) allows Ethereum users to prove their membership of a group and send signals such as votes or endorsements without revealing their original identity. 
 
-Run the following commands sequentially in three separate tabs of the terminal:
+With their circuits and verification system on smart contracts, zkSMARTHealthCards enables users prove their membership of particular COVID-19 immunization group without revealing their personal information.
 
-```bash
-yarn start:contracts
-```
+## Project Structure
+The project has three main folders within root directory:
 
-```bash
-yarn start:web-app
-```
+* contract/
+* frontend/
 
-```bash
-yarn start:relay
-```
+### contract
+The contract folder contains all the smart contracts used in zkSMARTHealthCards.
 
-### Code quality and formatting
+### frontend
+The frontend folder contains frontend files  built with [Nextjs](https://nextjs.org/).
 
-Run [ESLint](https://eslint.org/) to analyze the code and catch bugs:
+## Process
 
-```bash
-yarn lint
-```
+1. Connect wallet
+2. If not yet, sign and generate Semaphore Identity for the proof system.
+3. Create an immunization group
+   1. Users need to send a transaction to create immunization data on chain.
+4. Join an immunization group
+   1. Check if the user is eligible to join the immunization group, which means the user have a valid SMARTHealthCards, and if eligible, user make a transaction to add a Identity to the MerkleTree on chain.
+5. Generate a zk proof
+   1. Make a MerkeTree inclusion proof.
+6. Verify the zk proof
 
-Run [Prettier](https://prettier.io/) to check formatting rules:
 
-```bash
-yarn prettier
-```
+## Deployed contracts
 
-or to automatically format the code:
+### Polygon Mumbai
 
-```bash
-yarn prettier:write
-```
+| Name | Contract Address | Status |
+| ---- | ---- | --- |
+| zkSMARTHealthCards| 0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9 | Verified |
+| Verifier| 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0 | Verified |
