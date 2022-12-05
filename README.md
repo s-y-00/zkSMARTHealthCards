@@ -16,6 +16,7 @@ Demo Video
 
 Slide
 
+https://www.slideshare.net/Yssy5/zksmarthealthcardspptx
 
 ## Problems with the current Covid-19 SMART Health Cards
 
